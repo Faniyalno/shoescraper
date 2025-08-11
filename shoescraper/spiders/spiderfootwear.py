@@ -6,10 +6,6 @@ class SpiderfootwearSpider(scrapy.Spider):
     allowed_domains = ["pyoppfledge.com"]
     start_urls = ["https://pyoppfledge.com/collections/barefoot-shoes"]
 
-    cusom_settings = {
-        'DOWNLOAD_DELAY' : 2,
-    }
-
     def parse(self, response):
         footwears = response.css('div.product-item')
         for footwear in footwears:
