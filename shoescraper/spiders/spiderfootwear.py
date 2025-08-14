@@ -21,12 +21,10 @@ class SpiderfootwearSpider(scrapy.Spider):
             yield response.follow(next_page_url, callback=self.parse)
 
     def parse_footwear(self, response):
-        # footwear = response.css('div.product__content')
         # I am Unable to make scrapy interact with the web to make filter that tells which size available works
         # is_available = response.css('button.btn > span:nth-child(1)::text').get().lower().strip()
         # if is_available == "add to cart":
         #     available_size = [response.css('button.fs-body-base::attr(aria-label)').get()]
-            
         yield{
             'name' : response.css('h1.product-single__title::text').get(),
             'price' : response.css('span.money::text').get(),
