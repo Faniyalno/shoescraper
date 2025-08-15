@@ -1,4 +1,5 @@
 import scrapy
+from shoescraper.items import FtwearItem
 
 
 class SpiderfootwearSpider(scrapy.Spider):
@@ -25,12 +26,12 @@ class SpiderfootwearSpider(scrapy.Spider):
         # is_available = response.css('button.btn > span:nth-child(1)::text').get().lower().strip()
         # if is_available == "add to cart":
         #     available_size = [response.css('button.fs-body-base::attr(aria-label)').get()]
-        yield{
-            'name' : response.css('h1.product-single__title::text').get(),
-            'price' : response.css('span.money::text').get(),
-            'size_list' : response.css('button.fs-body-base::attr(aria-label)').getall(),
-            'vendor' : response.css('div.product__vendor a::text').get(),
-            'url' : response.url,
-        }
 
-            
+        ftwear_item = FtwearItem()
+        ftwear_item['name'] = response.css('h1.product-single__title::text').get(),
+        ftwear_item['price'] = response.css('span.money::text').get(),
+        ftwear_item['size_lists'] = response.css('button.fs-body-base::attr(aria-label)').getall(),
+        ftwear_item['vendor'] = response.css('div.product__vendor a::text').get(),
+        ftwear_item['url'] = response.url,
+
+        yield ftwear_item
