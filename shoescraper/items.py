@@ -17,4 +17,5 @@ class FtwearItem(scrapy.Item):
     price = scrapy.Field()
     size_lists = scrapy.Field()
     vendor = scrapy.Field()
-    url = scrapy.Field()    
+    url = scrapy.Field()
+    description = scrapy.Field()

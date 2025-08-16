@@ -28,6 +28,8 @@ class SpiderfootwearSpider(scrapy.Spider):
         #     available_size = [response.css('button.fs-body-base::attr(aria-label)').get()]
 
         list_option_rectangle = response.css('select.pf-input::attr(name)').get()
+        desc_checker = response.css('div.product-single__description span::text').getall()
+        desc_checker2 = response.css('div.product-single__description p::text').getall(),
 
         ftwear_item = FtwearItem()
         ftwear_item['name'] = response.css('h1.product-single__title::text').get(),
@@ -37,6 +39,12 @@ class SpiderfootwearSpider(scrapy.Spider):
         else: 
             ftwear_item['size_lists'] = response.css('button.fs-body-base::attr(aria-label)').getall(),
         ftwear_item['vendor'] = response.css('div.product__vendor a::text').get(),
+        if desc_checker or desc_checker2 is not None:
+            ftwear_item['description'] = response.css('div.product-single__description span::text').getall(),
+        elif desc_checker or desc_checker2 is not None:
+            ftwear_item['description'] = response.css('div.product-single__description p::text').getall(),
+        else:
+            ftwear_item['description'] = response.css('div.product-single__description::text').getall(),
         ftwear_item['url'] = response.url,
 
         yield ftwear_item
