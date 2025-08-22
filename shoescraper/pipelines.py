@@ -18,4 +18,13 @@ class ShoescraperPipeline:
         trimmed = [trim.strip() for trim in size_lists[0]] 
         float_trimmed = [float(f) for f in trimmed]
         adapter['size_lists'] = float_trimmed
+
+        #normalizedd description & join it to a single string
+        descrip = adapter.get('description')
+        normalized_desc = ''
+        for desc in descrip:
+            normalized_desc += desc + ''
+        normalized_desc = normalized_desc.strip().replace("\u00A0", '')
+        adapter['description'] = normalized_desc
+
         return item
