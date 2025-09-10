@@ -12,6 +12,11 @@ BOT_NAME = "shoescraper"
 SPIDER_MODULES = ["shoescraper.spiders"]
 NEWSPIDER_MODULE = "shoescraper.spiders"
 
+SCRAPEOPS_API_KEY = 'd3c3b117-f3f5-4354-aa83-dffa3b7fa3b0'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 30
+
 ADDONS = {}
 
 
@@ -46,9 +51,10 @@ DOWNLOAD_DELAY = 1
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "shoescraper.middlewares.ShoescraperDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # "shoescraper.middlewares.ShoescraperDownloaderMiddleware": 543,
+   "shoescraper.middlewares.FakeUserAgentMiddleware": 400
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
